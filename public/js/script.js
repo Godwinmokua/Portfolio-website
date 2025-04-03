@@ -33,24 +33,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start typing effect
     setTimeout(type, 1000);
 
-    // Mobile Menu Toggle
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+// Mobile Menu Toggle with Animation
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
 
-    mobileMenuButton.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-    });
+mobileMenuButton.addEventListener('click', function() {
+    // Toggle the show class for animation
+    mobileMenu.classList.toggle('show');
+    
+    // Toggle aria-expanded for accessibility
+    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !isExpanded);
+    
+    // Change icon between hamburger and close
+    const icon = this.querySelector('i');
+    if (mobileMenu.classList.contains('show')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+    } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+    }
+});
 
-    // Close mobile menu when clicking a link
-    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-        });
+// Close menu when clicking on a link (for single-page navigation)
+const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        mobileMenu.classList.remove('show');
+        mobileMenuButton.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
     });
+});
 
     // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();

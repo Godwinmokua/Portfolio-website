@@ -34,6 +34,56 @@ body {
   .nav-link:hover::after {
       width: 100%;
   }
+  /* Mobile Menu Fix */
+#mobile-menu {
+    display: none;
+}
+
+#mobile-menu.show {
+    display: block;
+    max-height: 500px; /* Adjust based on your menu content height */
+    opacity: 1;
+    transition: max-height 0.5s ease-in, opacity 0.3s ease;
+}
+/* Mobile Menu Animation */
+#mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease;
+    opacity: 0;
+}
+
+/* Mobile menu backdrop effect */
+@media (max-width: 767px) {
+    #mobile-menu {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 100%;
+        z-index: 1000;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Optional: Add a semi-transparent overlay */
+    body.menu-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    body.menu-open::after {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
   
   /* Portfolio Filter */
   .portfolio-filter.active {
