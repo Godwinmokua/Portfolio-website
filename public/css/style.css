@@ -90,6 +90,15 @@ body{
         opacity: 1;
         pointer-events: auto;
     }
+    .flex-buttons{
+        display: flex;
+        flex-direction: column;
+        padding: 0 50px;
+        align-content: center;
+    }
+    .buttons{
+        margin: 10px;
+    }
 }
   
 /* Portfolio Filter */
