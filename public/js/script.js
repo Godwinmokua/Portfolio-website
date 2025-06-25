@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Typing Effect
     const typingText = document.getElementById('typing-text');
-    const words = ["a Software Developer", "a Full-Stack Developer", "a Tech Enthusiast","GeeTech Company Founder"];
+    const words = ["a Software Developer", "a Full-Stack Developer", "a Tech Enthusiast","Orbix Technologies Founder"];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
