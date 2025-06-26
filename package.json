@@ -4,18 +4,19 @@
       "description": "Professional portfolio website with database integration",
       "main": "server/server.js",
       "scripts": {
-        "start": "node server/server.js",
-        "dev": "nodemon server/server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+            "start": "node server/server.js",
+            "dev": "nodemon server/server.js",
+            "test": "echo \"Error: no test specified\" && exit 1"
       },
       "dependencies": {
-        "cors": "^2.8.5",
-        "dotenv": "^16.0.3",
-        "ejs": "^3.1.8",
-        "express": "^4.18.2",
-        "mongoose": "^7.0.2"
+            "cors": "^2.8.5",
+            "dotenv": "^16.0.3",
+            "ejs": "^3.1.8",
+            "express": "^4.18.2",
+            "mongoose": "^7.0.2",
+            "nodemailer": "^7.0.3"
       },
       "devDependencies": {
-        "nodemon": "^2.0.20"
+            "nodemon": "^3.1.10"
       }
 }
