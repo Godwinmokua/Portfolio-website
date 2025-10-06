@@ -112,37 +112,56 @@ mobileMenuLinks.forEach(link => {
 
 
 
-    // Contact Form Submission
+   // Contact Form Submission
     const contactForm = document.getElementById('contact-form');
     const successModal = document.getElementById('success-modal');
     const closeSuccessBtn = document.getElementById('close-success');
 
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        const messageData = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message'),
-            timestamp: new Date().toISOString()
-        };
-        
-        // Send message to server (simulated with setTimeout)
-        console.log('Message Data:', messageData);
-        
-        // Simulate API call
-        setTimeout(() => {
-            // Show success message
-            document.getElementById('success-message').textContent = 'Your message has been sent successfully!';
-            successModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            
-            // Reset form
-            contactForm.reset();
-        }, 1000);
+    contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const messageData = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+        timestamp: new Date().toISOString()
+    };
+
+    try {
+        // 🔥 Send the data to your backend (update URL if hosted)
+        const response = await fetch("https://portfolio-website-cf77.onrender.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(messageData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+        document.getElementById('success-message').textContent =
+            result.success || 'Your message has been sent successfully!';
+        successModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        contactForm.reset();
+        } else {
+        alert(result.error || "Something went wrong. Please try again later.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Network error. Please check your connection and try again.");
+    }
     });
+
+    // Optional: Close success modal
+    if (closeSuccessBtn) {
+    closeSuccessBtn.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    });
+    }
+
 
     closeSuccessBtn.addEventListener('click', function() {
         successModal.classList.add('hidden');
