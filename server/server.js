@@ -35,7 +35,7 @@ app.post("/send", async (req, res) => {
     // Send the email
     await transporter.sendMail({
       from: `"${name}" <${email}>`,
-      to: "godwinmokua2004@gmail.com", // your receiving email
+      to: "info@godwinobiria.co.ke", // your receiving email
       subject: subject,
       text: message,
       html: `
