@@ -5,7 +5,9 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "https://godwinobiria.co.ke"
+}));
 app.use(express.json());
 
 // === Route for handling contact form submission ===
