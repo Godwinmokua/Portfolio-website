@@ -112,25 +112,15 @@ mobileMenuLinks.forEach(link => {
 
 
 
-   // =============================
-    // Contact Form Submission
-    // =============================
+   // Contact Form Submission
     const contactForm = document.getElementById('contact-form');
     const successModal = document.getElementById('success-modal');
     const closeSuccessBtn = document.getElementById('close-success');
 
-    // Close the success modal when clicking the close button
-    closeSuccessBtn.addEventListener('click', () => {
-    successModal.classList.add('hidden');
-    document.body.style.overflow = 'auto';
-    });
-
-    // Handle form submission
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Collect form data
-    const formData = new FormData(contactForm);
+    const formData = new FormData(this);
     const messageData = {
         name: formData.get('name'),
         email: formData.get('email'),
@@ -140,36 +130,29 @@ mobileMenuLinks.forEach(link => {
     };
 
     try {
-        // 🔥 Send the data to your backend
+        // 🔥 Send the data to your backend (update URL if hosted)
         const response = await fetch("https://portfolio-website-w0cf.onrender.com/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(messageData)
+        body: JSON.stringify(messageData),
         });
 
-        // Parse JSON response
         const result = await response.json();
 
         if (response.ok) {
-        // Show success message
         document.getElementById('success-message').textContent =
             result.success || 'Your message has been sent successfully!';
         successModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-
-        // Reset form fields
         contactForm.reset();
         } else {
-        // Backend returned an error
         alert(result.error || "Something went wrong. Please try again later.");
         }
     } catch (error) {
-        // Network or unexpected error
-        console.error("Error sending message:", error);
+        console.error("Error:", error);
         alert("Network error. Please check your connection and try again.");
     }
     });
-
 
     // Optional: Close success modal
     if (closeSuccessBtn) {
