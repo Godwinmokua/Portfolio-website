@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Message = require('../models/Message');
-const Order = require('../models/Order');
 const Service = require('../models/Service');
 
 // Get all services
@@ -29,28 +28,6 @@ router.post('/contact', async (req, res) => {
         await newMessage.save();
         
         res.json({ success: true, message: 'Message sent successfully!' });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-// Submit order
-router.post('/orders', async (req, res) => {
-    try {
-        const { customer, items, subtotal, tax, total, paymentMethod } = req.body;
-        
-        const newOrder = new Order({
-            customer,
-            items,
-            subtotal,
-            tax,
-            total,
-            paymentMethod
-        });
-        
-        await newOrder.save();
-        
-        res.json({ success: true, order: newOrder });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
