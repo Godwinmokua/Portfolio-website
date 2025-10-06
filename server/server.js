@@ -19,9 +19,9 @@ app.post("/send", async (req, res) => {
   try {
     // Configure transporter with your SpaceMail SMTP settings
     const transporter = nodemailer.createTransport({
-      host: "smtp.spacemail.com", // Example: replace with the actual SpaceMail SMTP host
-      port: 587,
-      secure: false, // true for port 465, false for 587
+      host: "mail.spacemail.com", // Example: replace with the actual SpaceMail SMTP host
+      port: 465,
+      secure: true, // true for port 465, false for 587
       auth: {
         user: process.env.SMTP_USER, // your SpaceMail email
         pass: process.env.SMTP_PASS, // your SpaceMail password or app password
