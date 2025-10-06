@@ -6,7 +6,9 @@ import cors from "cors";
 dotenv.config();
 const app = express();
 app.use(cors({
-    origin: "https://godwinobiria.co.ke"
+  origin: "https://godwinobiria.co.ke", // <-- your frontend domain
+  methods: ["GET", "POST"],            // allowed methods
+  credentials: true                    // if you need cookies/auth
 }));
 app.use(express.json());
 
