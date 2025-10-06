@@ -131,7 +131,7 @@ mobileMenuLinks.forEach(link => {
 
     try {
         // 🔥 Send the data to your backend (update URL if hosted)
-        const response = await fetch("https://portfolio-website-cf77.onrender.com", {
+        const response = await fetch("https://portfolio-website-1-0r4h.onrender.com/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(messageData),
